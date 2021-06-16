@@ -1,0 +1,1 @@
+Source of data: https://data.world/crowdflower/brands-and-product-emotions Accessed June 14, 2021.
