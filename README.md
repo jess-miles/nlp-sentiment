@@ -59,7 +59,9 @@ The most frequently occuring n-grams in each labeled class differed slightly, bu
 # Modeling Aproach
 - Tested Naive Bayes (Multinomial), Random Forest, and Logistic Regression classifiers
 - To determine optimal preprocessing steps, model type, and model hyperparameters, ran gridsearches optimized for recall macro
-- Evaluated both binary (positive and negative) and multi-class (positive, negative, and no emotion) classification
+- Evaluated both binary (positive and negative) and multi-class (positive, negative, and no emotion) classification. Compared the all-in-one multi-class model to the performance if we used multi-class as the first pass, and the binary model as the second pass.
+
+<img src='images/models.png'>
 
 # Best Model
 - The best model for both binary and muli-class classification problems were both Logistic Regression. The models agreed on most preprocessing and model hyperparameters, but differed in a few ways:
@@ -75,6 +77,8 @@ The most frequently occuring n-grams in each labeled class differed slightly, bu
 - **~30% better than guessing randomly** based on class distribution
 - Identified about the same percentage of True Positives for any class, although confused Positive and No Sentiment more often than either of these with Negative
 
+<img src='images/allone_confmatrix.png'>
+
 ## Binary Model Results
 
 - Best model achieved **~75% balanced accuracy** across both classes on unseen test data
@@ -82,6 +86,16 @@ The most frequently occuring n-grams in each labeled class differed slightly, bu
 - Better at predicting positive sentiment than negative: only ~10-15% of Positives misclassified as Negative, while ~30-40% of Negatives misclassified as Positive
 
 > Even humans only label only about 80% of data accurately (in agreement with each other), so our models aren't much worse
+
+<img src='images/binary_confmatrix.png'>
+
+## Tiered Model
+
+- For the tiered model, I took the tweets that the multi-class model predicted to be positive or negative, and fed them into the binary model for final sentiment prediction.
+- Because the binary model performed slightly better, having been trained exclusively on positive and negative tweets, the overall accuracy was slightly better than using the multi-class model solo.
+- Tiered approach yields the most accurate overall results.
+
+<img src='images/tiered_confmatrix.png'>
 
 # Model Insights
 
